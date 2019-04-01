@@ -17,7 +17,7 @@ class Square extends React.Component {
           alert("click");
         }}
       >
-        {this.props.value}
+        {this.state.value}
       </button>
     );
   }
