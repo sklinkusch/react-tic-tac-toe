@@ -89,21 +89,27 @@ class Game extends React.Component {
     };
   }
   render() {
-    return React.createElement(
-      "div",
-      { className: "game" },
-      React.createElement(
-        "div",
-        { className: "game-board" },
-        React.createElement(Board, null)
-      ),
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const winner = calculateWinner(current.squares);
 
-      React.createElement(
-        "div",
-        { className: "game-info" },
-        React.createElement("div", null),
-        React.createElement("ol", null)
-      )
+    let status;
+    if(winner){
+      status = "Winner: " + winner;
+    }else{
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+    }
+    
+    return (
+      <div className="game">
+        <div className="game-board">
+          <Board squares={current.squares} onClick={(i) => this.handleClick(i)} />
+        </div>
+        <div className="game-info">
+          <div>{status</div>
+          <ol>{/* TODO */}</ol>
+        </div>
+      </div>
     );
   }
 }
