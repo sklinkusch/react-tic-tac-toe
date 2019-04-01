@@ -10,7 +10,7 @@ class Square extends React.Component {
 
 class Board extends React.Component {
   renderSquare(i) {
-    return React.createElement(Square, null);
+    return <Square value={i} />;
   }
 
   render() {
