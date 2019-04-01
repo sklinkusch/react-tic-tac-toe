@@ -4,7 +4,7 @@ import "./index.css";
 
 class Square extends React.Component {
   render() {
-    return React.createElement("button", { className: "square" });
+    return <button className="square">{this.props.value}</button>;
   }
 }
 
