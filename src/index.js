@@ -70,6 +70,9 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+    for (let j = 0; j < squares.length; j++) {
+      document.getElementById(`${j}`).style.backgroundColor = "#fff";
+    }
     squares[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
       history: history.concat([
