@@ -6,6 +6,7 @@ function Square(props) {
   return (
     <button
       className="square"
+      id={props.number}
       onClick={() => {
         props.onClick({ value: "X" });
       }}
@@ -20,6 +21,7 @@ class Board extends React.Component {
     return (
       <Square
         value={this.props.squares[i]}
+        number={i}
         onClick={() => this.props.onClick(i)}
       />
     );
@@ -143,6 +145,9 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      document.getElementById(`${a}`).style.backgroundColor = "yellow";
+      document.getElementById(`${b}`).style.backgroundColor = "yellow";
+      document.getElementById(`${c}`).style.backgroundColor = "yellow";
       return squares[a];
     }
   }
