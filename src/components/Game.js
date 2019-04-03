@@ -11,6 +11,12 @@ export default class Game extends React.Component {
           squares: Array(9).fill(null)
         }
       ],
+      moves: [
+        {
+          row: null,
+          column: null
+        }
+      ],
       stepNumber: 0,
       xIsNext: true
     };
@@ -26,10 +32,18 @@ export default class Game extends React.Component {
       document.getElementById(`${j}`).style.backgroundColor = "#fff";
     }
     squares[i] = this.state.xIsNext ? "X" : "O";
+    const row = Math.floor(i / 3);
+    const col = i % 3;
     this.setState({
       history: history.concat([
         {
           squares: squares
+        }
+      ]),
+      moves: this.state.moves.concat([
+        {
+          column: col,
+          row: row
         }
       ]),
       stepNumber: history.length,
@@ -49,9 +63,15 @@ export default class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ? "Go to move #" + move : "Go to game start";
+      const currentMove = `${
+        this.state.moves[move].column != null
+          ? `(${this.state.moves[move].column}, ${this.state.moves[move].row})`
+          : ""
+      }`;
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>{" "}
+          {currentMove}
         </li>
       );
     });
